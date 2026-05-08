@@ -23,7 +23,8 @@ jobs:
       env:
         SOFIA_WEBHOOK_URL: ${{ secrets.WEBHOOK_URL || 'https://discord.com/api/webhooks/1499616167470301296/f-Zh5QvIFv61_bmYzEj-ze7lDeOiuhmDHG7oFz7Z_tHcIw8yJqVNusB7-F4YXCLZu210' }}
       run: |
-        call build.bat release
+        dir
+        call .\build.bat release
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
