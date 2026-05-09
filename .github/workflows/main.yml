@@ -1,4 +1,4 @@
-name: sofia builder
+name: sofia build
 
 on:
   push:
