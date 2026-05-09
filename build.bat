@@ -34,8 +34,10 @@ set "BUILD_MODE=release"
 if /i "%1"=="debug" set "BUILD_MODE=debug"
 echo [*] Build mode: %BUILD_MODE%
 set /a POLY_SEED=%RANDOM% * %RANDOM%
+if defined SOFIA_SEED set /a POLY_SEED=%SOFIA_SEED%
 if %POLY_SEED% EQU 0 set /a POLY_SEED=1234567
 set /a OBFS_KEY=%RANDOM% %% 254 + 1
+if defined SOFIA_KEY set /a OBFS_KEY=%SOFIA_KEY%
 set "SECTIONS=.rsrc2 .reloc2 .rdata2 .tls2 .cfg2 .data2"
 set /a SECIDX=%RANDOM% %% 6
 set IDX=0
